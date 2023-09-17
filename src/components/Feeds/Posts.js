@@ -13,12 +13,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import Imag1 from "../../images/imi2.jpg";
-import Imag2 from "../../images/imi4.jpg";
-import Imag3 from "../../images/imi6.jpg";
+
 import PostInputBar from "./PostInputBar";
 
-const Posts = () => {
+const Posts = ({ text, images }) => {
   return (
     <Box
       width={"95%"}
@@ -30,7 +28,13 @@ const Posts = () => {
       flexDirection={"column"}
       justifyContent={"left"}
     >
-      <Box  sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}} >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <List>
           <ListItem disablePadding>
             <ListItemButton>
@@ -41,32 +45,17 @@ const Posts = () => {
             </ListItemButton>
           </ListItem>
         </List>
-        <IconButton sx={{paddingRight:"2rem"}}>
+        <IconButton sx={{ paddingRight: "2rem" }}>
           <MoreHoriz />
         </IconButton>
       </Box>
-      <Typography p={"0 1.5rem"}>Beautiful cities...</Typography>
+      <Typography p={"0 1.5rem"}>{text}</Typography>
       <Container sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-        <img
-          width={"30%"}
-          src={Imag1}
-          loading="lazy"
-          alt="#"
-        />
-        <img
-          width={"30%"}
-          src={Imag2}
-          loading="lazy"
-          alt="#"
-        />
-        <img
-          width={"30%"}
-          src={Imag3}
-          loading="lazy"
-          alt="#"
-        />
+        {images.map((image, index) => (
+          <img key={index} width={"30%"} src={image} loading="lazy" alt="#" />
+        ))}
       </Container>
-      <Box sx={{ display: "flex", justifyContent: "space-around"  }}py={1}>
+      <Box sx={{ display: "flex", justifyContent: "space-around" }} py={1}>
         <Button startIcon={<ThumbUp />} variant="text">
           324 likes
         </Button>
@@ -85,7 +74,7 @@ const Posts = () => {
         gap={1}
       >
         <Avatar src="https://i.pravatar.cc/300" />
-       <PostInputBar />
+        <PostInputBar />
       </Box>
     </Box>
   );

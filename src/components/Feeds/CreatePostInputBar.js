@@ -6,7 +6,7 @@ import {
   SendOutlined,
   VideoCallOutlined,
 } from "@mui/icons-material";
-import { InputBase } from "@mui/material";
+import { IconButton, InputBase } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
 
@@ -21,7 +21,6 @@ const Search = styled("div")(({ theme }) => ({
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   height: "100%",
-  pointerEvents: "none",
   display: "flex",
   alignItems: "center",
   justifyContent: "left",
@@ -33,25 +32,40 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   paddingLeft: "1rem",
-  width:"100%"
+  width: "100%",
 }));
 
-
-const CreatePostInputBar = () => {
+const CreatePostInputBar = ({
+  handleInputChange,
+  inputState,
+  handleOnClick,
+  handleImageInput,
+}) => {
   return (
     <>
       <Search>
         <StyledInputBase
+          value={inputState}
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
+          onChange={handleInputChange}
         />
 
         <SearchIconWrapper>
-          <ImageOutlined />
+          <IconButton component="label">
+            <input
+              type="file"
+              hidden
+              onClick={handleImageInput}
+            />
+            <ImageOutlined />
+          </IconButton>
           <VideoCallOutlined />
           <EmojiEmotionsOutlined />
           <PersonOutlined />
-          <SendOutlined />
+          <IconButton onClick={handleOnClick}>
+            <SendOutlined />
+          </IconButton>
         </SearchIconWrapper>
       </Search>
     </>
