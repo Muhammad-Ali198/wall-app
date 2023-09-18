@@ -1,22 +1,64 @@
-import { Message, MoreHoriz, Share, ThumbUp } from "@mui/icons-material";
+import {
+  DeleteOutline,
+  Message,
+  MoreHoriz,
+  Share,
+  ThumbUp,
+} from "@mui/icons-material";
 import {
   Avatar,
   Box,
   Button,
   Container,
+  Divider,
   IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 import PostInputBar from "./PostInputBar";
+import { grey } from "@mui/material/colors";
 
 const Posts = ({ text, images }) => {
+  // comment section on and off
+
+  const [showComment, setShowComment] = useState(false);
+
+  // Posted comments section
+
+  const [commentList, setCommentList] = useState([{ text: "hoome" }]);
+
+  // State for the current input
+
+  const [input, setInput] = useState("");
+
+  // Function to handle input change
+  const handleInputChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const handleSendClick = (event) => {
+    event.preventDefault();
+    if(input.length <= null ){
+      return
+    }else{
+      
+      setCommentList([...commentList, { text: input }]);
+      setInput("");
+    }
+  };
+
+  const handleDelete = (idx) => {
+    let temp = commentList.filter((obj, idx2) => idx2 !== idx);
+    setCommentList(temp);
+  };
+
   return (
     <Box
       width={"95%"}
@@ -59,8 +101,13 @@ const Posts = ({ text, images }) => {
         <Button startIcon={<ThumbUp />} variant="text">
           324 likes
         </Button>
-        <Button startIcon={<Message />} variant="text" color="secondary">
-          2 Comments
+        <Button
+          startIcon={<Message />}
+          variant="text"
+          color="secondary"
+          onClick={() => setShowComment(!showComment)}
+        >
+          {`${commentList.length} Comments`}
         </Button>
         <Button startIcon={<Share />} variant="text" color="error">
           45 Shares
@@ -74,7 +121,60 @@ const Posts = ({ text, images }) => {
         gap={1}
       >
         <Avatar src="https://i.pravatar.cc/300" />
-        <PostInputBar />
+        <PostInputBar
+          showComment={showComment}
+          setShowComment={setShowComment}
+          handleSendClick={handleSendClick}
+          handleInputChange={handleInputChange}
+          input={input}
+        />
+      </Box>
+      <Box sx={{ display: showComment ? "block" : "none" }}>
+        <Divider />
+
+        {commentList.map((item, idx) => (
+          <Box
+            width={"98%"}
+            p={"10px 15px"}
+            display={"flex"}
+            alignItems={"center"}
+            gap={1}
+            borderRadius={4}
+            sx={{
+              wordWrap: "break-word",
+              overflowWrap: "break-word",
+              flexWrap: "wrap",
+              p: 1,
+            }}
+          >
+            <Stack
+              // display={"flex"}
+              width={"100%"}
+              justifyContent={"space-between"}
+              direction={"row"}
+              bgcolor={grey[200]}
+              borderRadius={2}
+            >
+              <Typography
+                width={"100%"}
+                sx={{ wordBreak: "break-all" }}
+                key={idx}
+                borderRadius={4}
+                // bgcolor={grey[200]}
+                p={1}
+              >
+                {item.text}
+              </Typography>
+              <IconButton
+                sx={{ color: "tomato" }}
+                onClick={() => handleDelete(idx)}
+              >
+                {/* <MoreHoriz /> */}
+                <DeleteOutline />
+              </IconButton>
+            </Stack>
+          </Box>
+        ))}
       </Box>
     </Box>
   );

@@ -7,7 +7,7 @@ import RecentActive from "./RecentActive";
 const RightBar = () => {
   return (
     <Box
-    bgcolor={"red"} flex={1} sx={{ overflow:"scroll", height:"100vh", '&::-webkit-scrollbar': { display: 'none' },display:{xs:"none", sm: "none", md:"flex"}}}
+    bgcolor={""} flex={1} sx={{ overflow:"scroll", height:"100vh", '&::-webkit-scrollbar': { display: 'none' },display:{xs:"none", sm: "none", md:"flex"}}}
     >
       <Stack flexDirection={"column"} gap={2} alignItems={"center"} mt={1}>
         <RecentPost />

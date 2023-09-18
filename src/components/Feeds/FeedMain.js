@@ -17,7 +17,7 @@ const FeedMain = () => {
 
   return (
     <Box
-      bgcolor={"coral"}
+      bgcolor={""}
       flex={2}
       sx={{
         overflow: "scroll",

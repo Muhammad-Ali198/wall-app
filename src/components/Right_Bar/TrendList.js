@@ -1,7 +1,7 @@
 import React from "react";
-import Trendpost from "./Trendpost";
 import { ViewAll } from "../StyledCompoents";
 import { Box, Typography } from "@mui/material";
+import TrendListData from "../../Data/TrendListData";
 
 const TrendList = () => {
   return (
@@ -10,17 +10,21 @@ const TrendList = () => {
       borderRadius={6}
       width={"95%"}
       boxShadow={"1px 23px 45px -11px rgba(0,0,0,0.5)"}
-      p={1}
     >
-      <Box sx={{ display: "flex", justifyContent: "space-between", padding:1 }}>
-        <Typography />
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          m: 2,
+        }}
+      >
+        <Typography fontWeight={"bold"}></Typography>
         <ViewAll />
       </Box>
-      <Trendpost />
-      <Trendpost />
-      <Trendpost />
-      <Trendpost />
-      <Trendpost />
+      <Box m={0.5}>
+        <TrendListData />
+      </Box>
     </Box>
   );
 };

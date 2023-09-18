@@ -46,7 +46,7 @@ const CreatePostInputBar = ({
       <Search>
         <StyledInputBase
           value={inputState}
-          placeholder="Search…"
+          placeholder="Whats in your mind....."
           inputProps={{ "aria-label": "search" }}
           onChange={handleInputChange}
         />
